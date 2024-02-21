@@ -68,7 +68,6 @@ export default function Page() {
             setTime(Number(cookies.time));
         }
         if (import.meta.env.MODE === 'production') {
-            console.log('GA4_ID:', import.meta.env.VITE_GA4_ID);
             ReactGA.initialize(import.meta.env.VITE_GA4_ID as string);
             ReactGA.send({
                 hitType: 'pageview',
