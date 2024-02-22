@@ -21,6 +21,7 @@ export default function Page() {
 
     const start = () => {
         if (time > 0) {
+            Notification.requestPermission();
             setIsRunning(true);
             setIsTimeUp(false);
             if (import.meta.env.MODE === 'production') {
@@ -60,7 +61,6 @@ export default function Page() {
     };
 
     useEffect(() => {
-        Notification.requestPermission();
         if (!cookies.time) {
             setCookie('time', 50);
             setTime(50);
