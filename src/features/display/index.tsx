@@ -35,7 +35,7 @@ const Display = memo((props: Props) => {
                     filter: `${!props.blur ? 'blur(0px)' : 'blur(8px)'}`,
                 }}
             />
-            <div className='fixed z-10 left-1/2 -translate-x-1/2 top-28 text-center text-[240px] max-[1200px]:text-[200px] max-[990px]:text-[160px] max-[810px]:text-[120px] max-[560px]:text-[80px] max-[375px]:text-[40px] font-[900] font-poppins flex items-center'>
+            <div className='fixed z-10 left-1/2 -translate-x-1/2 sm:top-28 top-32 text-center text-[240px] max-[1200px]:text-[200px] max-[990px]:text-[160px] max-[810px]:text-[120px] max-[560px]:text-[80px] max-[375px]:text-[40px] font-[900] font-poppins flex items-center'>
                 <div className={COMMON_CLASS_NAME_NUMBER}>
                     {hours.toString().length == 2 ? hours.toString()[0] : '0'}
                 </div>

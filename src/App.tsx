@@ -7,6 +7,7 @@ import Problems from './features/problems';
 import Display from './features/display';
 import { useCookies } from 'react-cookie';
 import ReactGA from 'react-ga4';
+import Guide from './features/guide';
 
 export default function Page() {
     const [time, setTime] = useState<number>(5);
@@ -14,6 +15,7 @@ export default function Page() {
     const intervalRef = useRef<any>(null);
     const [isTimeUp, setIsTimeUp] = useState<boolean>(false);
     const [cookies, setCookie] = useCookies();
+    const [sound] = useState(new Audio('/sound/bush-warbler.mp3'));
 
     const seconds = time % 60;
     const minutes = Math.floor((time / 60) % 60);
@@ -36,7 +38,7 @@ export default function Page() {
                     if (e.data.remainTime === 0) {
                         setIsRunning(false);
                         setIsTimeUp(true);
-                        new Audio('/sound/bush-warbler.mp3').play();
+                        sound.play();
                         if (import.meta.env.MODE === 'production') {
                             ReactGA.event('done-timer');
                         }
@@ -58,6 +60,11 @@ export default function Page() {
         if (intervalRef.current) {
             intervalRef.current.terminate();
         }
+    };
+
+    const stopSound = () => {
+        sound.pause();
+        sound.currentTime = 0;
     };
 
     useEffect(() => {
@@ -84,8 +91,12 @@ export default function Page() {
                 seconds={seconds}
                 blur={!isRunning && isTimeUp}
             />
-            <Problems display={!isRunning && isTimeUp} />
-            <div className='fixed sm:bottom-10 bottom-5 w-full left-0 sm:px-10 px-5 flex justify-between items-center z-40'>
+            <Problems
+                display={!isRunning && isTimeUp}
+                stopSound={() => stopSound()}
+            />
+            <Guide display={!isRunning && !isTimeUp} />
+            <div className='fixed sm:bottom-10 top-5 sm:top-auto w-full left-0 sm:px-10 px-5 flex justify-between items-center z-40'>
                 <div className='flex md:gap-4 gap-2 items-center md:flex-row flex-col'>
                     <StartButton
                         isRunning={isRunning}
