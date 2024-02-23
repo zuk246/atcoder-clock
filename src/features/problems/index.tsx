@@ -1,7 +1,7 @@
 import { memo, useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
 import dayjs from 'dayjs';
-import { FaClock, FaRegFaceDizzy, FaRegFaceLaughWink } from 'react-icons/fa6';
+import { FaClock, FaRegFaceDizzy } from 'react-icons/fa6';
 import { Transition } from '@headlessui/react';
 
 type Props = {
