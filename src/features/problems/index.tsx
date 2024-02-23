@@ -1,11 +1,12 @@
 import { memo, useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
 import dayjs from 'dayjs';
-import { FaRegFaceDizzy, FaRegFaceLaughWink } from 'react-icons/fa6';
+import { FaClock, FaRegFaceDizzy, FaRegFaceLaughWink } from 'react-icons/fa6';
 import { Transition } from '@headlessui/react';
 
 type Props = {
     display: boolean;
+    stopSound: () => void;
 };
 
 type Problem = {
@@ -69,14 +70,11 @@ const Problems = memo((props: Props) => {
             leave='transition-opacity duration-300'
             leaveFrom='opacity-100'
             leaveTo='opacity-0'
-            className='sm:max-w-md fixed w-full sm:top-[26rem] sm:bottom-auto bottom-0 sm:p-5 p-5 pt-10 left-1/2 -translate-x-1/2 rounded-xl bg-white/40 backdrop-blur z-40'
+            className='sm:max-w-md fixed w-full sm:top-[26rem] sm:bottom-auto bottom-0 sm:p-5 p-5 pt-10 left-1/2 -translate-x-1/2 rounded-xl bg-white/25 shadow ring-1 ring-white/50 backdrop-blur-lg z-40'
         >
             <div className='py-4'>
                 {!data?.isError && (
-                    <FaRegFaceLaughWink
-                        size={75}
-                        className='mx-auto text-white'
-                    />
+                    <FaClock size={75} className='mx-auto text-white' />
                 )}
                 {data?.isError && (
                     <FaRegFaceDizzy size={75} className='mx-auto text-white' />
@@ -86,7 +84,7 @@ const Problems = memo((props: Props) => {
                 <h1 className='uppercase text-center text-3xl text-white font-bold line-clamp-1'>
                     {data?.data?.contest_id} - {data?.data?.problem_id}
                 </h1>
-                <div className='text-white p-5 bg-white/40 rounded-xl mt-3'>
+                <div className='text-white p-5 bg-white/20 rounded-xl mt-3'>
                     <p className='text-center'>前回の結果</p>
                     <div className='flex flex-col gap-1 text-sm'>
                         <p>結果: {data?.data?.result}</p>
@@ -102,6 +100,7 @@ const Problems = memo((props: Props) => {
                             href={`https://atcoder.jp/contests/${data?.data?.contest_id}/tasks/${data?.data?.problem_id}`}
                             target='_blank'
                             rel='noopener noreferrer'
+                            onClick={() => props.stopSound()}
                             className='w-full bg-blue-500 text-white hover:bg-blue-600 rounded-xl p-3 text-center font-bold block transition-all duration-300'
                         >
                             問題を解く
@@ -109,7 +108,7 @@ const Problems = memo((props: Props) => {
                     )}
                     {data?.isError && (
                         <div className='w-full bg-red-500 text-white hover:bg-red-600 rounded-xl p-3 text-center font-bold block transition-all duration-300'>
-                            ヘルプページをご覧ください
+                            ID未設定又は提案する問題が存在しません
                         </div>
                     )}
                 </div>
