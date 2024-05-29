@@ -70,7 +70,7 @@ const Problems = memo((props: Props) => {
             leave='transition-opacity duration-300'
             leaveFrom='opacity-100'
             leaveTo='opacity-0'
-            className='sm:max-w-md fixed w-full sm:top-[26rem] sm:bottom-auto bottom-0 sm:p-5 p-5 pt-10 left-1/2 -translate-x-1/2 rounded-xl bg-white/25 shadow ring-1 ring-white/50 backdrop-blur-lg z-40'
+            className='sm:max-w-md fixed w-full sm:bottom-[3rem] bottom-0 sm:p-5 p-5 pt-10 left-1/2 -translate-x-1/2 rounded-xl bg-white/25 shadow ring-1 ring-white/50 backdrop-blur-lg z-40'
         >
             <div className='py-4'>
                 {!data?.isError && (

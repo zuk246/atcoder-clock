@@ -9,7 +9,7 @@ const Links = memo(() => {
                 href='https://twitter.com/zuk246'
                 target='_blank'
                 rel='noopener noreferrer'
-                className='text-white/40'
+                className='text-white/60'
             >
                 <FaXTwitter size={24} />
             </a>
@@ -17,7 +17,7 @@ const Links = memo(() => {
                 href='https://github.com/zuk246/atcoder-timer'
                 target='_blank'
                 rel='noopener noreferrer'
-                className='text-white/40'
+                className='text-white/60'
             >
                 <FaGithub size={24} />
             </a>
@@ -25,7 +25,7 @@ const Links = memo(() => {
                 href='https://www.buymeacoffee.com/zuk246'
                 target='_blank'
                 rel='noopener noreferrer'
-                className='text-white/40'
+                className='text-white/60'
             >
                 <SiBuymeacoffee size={24} />
             </a>
@@ -33,7 +33,7 @@ const Links = memo(() => {
                 href='https://zenn.dev/iizuka0000/articles/atcoder-clock-introduction'
                 target='_blank'
                 rel='noopener noreferrer'
-                className='text-white/40'
+                className='text-white/60'
             >
                 <FaQuestion size={24} />
             </a>

@@ -15,7 +15,7 @@ export default function Page() {
     const intervalRef = useRef<any>(null);
     const [isTimeUp, setIsTimeUp] = useState<boolean>(false);
     const [cookies, setCookie] = useCookies();
-    const [sound] = useState(new Audio('/sound/bush-warbler.mp3'));
+    const [sound] = useState(new Audio('/sound/timer.mp3'));
 
     const seconds = time % 60;
     const minutes = Math.floor((time / 60) % 60);
@@ -74,6 +74,11 @@ export default function Page() {
         } else {
             setTime(Number(cookies.time));
         }
+
+        if (!cookies.background) {
+            setCookie('background', 'black');
+        }
+
         if (import.meta.env.MODE === 'production') {
             ReactGA.initialize(import.meta.env.VITE_GA4_ID as string);
             ReactGA.send({
@@ -89,7 +94,7 @@ export default function Page() {
                 hours={hours}
                 minutes={minutes}
                 seconds={seconds}
-                blur={!isRunning && isTimeUp}
+                blur={!isRunning || isTimeUp}
             />
             <Problems
                 display={!isRunning && isTimeUp}
