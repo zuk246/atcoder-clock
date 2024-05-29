@@ -1,15 +1,20 @@
-import { Transition } from '@headlessui/react';
+import { Listbox, Transition } from '@headlessui/react';
 import { memo, useEffect, useState } from 'react';
 import { Button } from '../../components/Button';
-import { FaGear } from 'react-icons/fa6';
+import { FaCheck, FaGear } from 'react-icons/fa6';
 import { Input } from '../../components/Input';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useCookies } from 'react-cookie';
 import toast from 'react-hot-toast';
+import { images } from '../../data/images';
 
 type FormType = {
     atcoderId: string;
 };
+
+function getImageDetail(id: string) {
+    return images.filter((image) => image.id === id)[0];
+}
 
 const Settings = memo(() => {
     const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -76,15 +81,41 @@ const Settings = memo(() => {
                     <FaGear size={20} />
                     <span className='text-2xl font-bold'>設定</span>
                 </h1>
-                <p className='text-sm'>AtcoderのID設定</p>
+                <p className='text-sm'>設定を変更することができます。</p>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className='my-4'>
+                        <p className='font-bold mb-1'>AtcoderのID</p>
                         <Input
                             placeholder='Atcoder ID'
                             type='text'
                             autoComplete='off'
                             {...register('atcoderId')}
                         />
+                    </div>
+                    <div className='my-4'>
+                        <p className='font-bold mb-1'>背景画像</p>
+                        <Listbox
+                            value={cookies.background}
+                            onChange={(v) => setCookie('background', v)}
+                        >
+                            <Listbox.Button className='w-full text-left px-4 py-2 bg-white text-black rounded-lg focus:outline-none ring-1 ring-blue-400 focus:ring-2 focus:ring-blue-500 duration-300 focus:ring-opacity-50'>
+                                {getImageDetail(cookies.background)?.name}
+                            </Listbox.Button>
+                            <Listbox.Options className='absolute translate-y-2 bg-white p-2 shadow-lg rounded-lg gap-2 w-96'>
+                                {images.map((image) => (
+                                    <Listbox.Option
+                                        key={image.id}
+                                        value={image.id}
+                                        className='cursor-pointer hover:bg-blue-100 p-2 rounded-lg flex items-center gap-2'
+                                    >
+                                        {cookies.background === image.id && (
+                                            <FaCheck />
+                                        )}
+                                        {image.name}
+                                    </Listbox.Option>
+                                ))}
+                            </Listbox.Options>
+                        </Listbox>
                     </div>
                     <div className='flex gap-2'>
                         <Button
